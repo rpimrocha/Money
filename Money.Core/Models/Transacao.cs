@@ -12,7 +12,7 @@ namespace Money.Core.Models
         public int Codigo { get; set; }
         public string Titulo { get; set; } = string.Empty;
         public DateTime DataCadastro { get; set; } = DateTime.Now;
-        public DateTime? DataTransacao { get; set; }
+        public DateTime? DataPagamento { get; set; }
         public ETipoTransacao Tipo { get; set; } = ETipoTransacao.Saida;
         public decimal Valor { get; set; }
         public long CodigoCategoria { get; set; }
