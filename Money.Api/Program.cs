@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Money.Api.Data;
+using Money.Core.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,10 +32,10 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapPost(
-    "/transacoes",
+    "/v1/categorias",
     ([FromBody] Request request, Handler handler) => handler.Handle(request))
-    .WithName("Transações: Criar")
-    .WithSummary("Cria uma nova transação.")
+    .WithName("Categorias: Criar")
+    .WithSummary("Cria uma nova categoria.")
     .Produces<Response>();
 
 app.Run();
@@ -43,27 +44,27 @@ app.Run();
 public class Request
 {
     public string Titulo { get; set; } = string.Empty;
-    public DateTime DataCadastro { get; set; } = DateTime.Now;
-    public int Tipo { get; set; }
-    public decimal Valor { get; set; }
-    public long CodigoCategoria { get; set; }
-    public string CodigoUsuario { get; set; } = string.Empty;
+    public string Descricao { get; set; } = string.Empty;
 }
 
 public class Response
 {
-    public int Codigo { get; set; }
+    public long Codigo { get; set; }
     public string Titulo { get; set; } = string.Empty;
 }
 
-public class Handler
+public class Handler(AppDbContext context)
 {
     public Response Handle(Request request)
     {
+        var categoria = new Categoria { Titulo = request.Titulo, Descricao = request.Descricao };
+        context.Categorias.Add(categoria);
+        context.SaveChanges();
+
         return new Response
         {
-            Codigo = 1,
-            Titulo = request.Titulo
+            Codigo = categoria.Codigo,
+            Titulo = categoria.Titulo
         };
     }
 }
