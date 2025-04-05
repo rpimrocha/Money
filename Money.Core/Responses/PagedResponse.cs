@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Money.Core.Responses
 {
-    public abstract class PaginaResponse<TDado> : Response<TDado>
+    public class PagedResponse<TDado> : Response<TDado>
     {
         [JsonConstructor]
-        public PaginaResponse(TDado? dado, int totalItens, int paginaAtual = Configuration.PaginaNumeroPadrao, 
-            int tamanhoPagina = Configuration.TamanhoPaginaPadrao) : base(dado)
+        public PagedResponse(TDado? dado, int totalItens, int paginaAtual = Configuracao.PaginaNumeroPadrao, 
+            int tamanhoPagina = Configuracao.TamanhoPaginaPadrao) : base(dado)
         {
             Dado = dado;
             TotalItens = totalItens;
@@ -20,7 +20,7 @@ namespace Money.Core.Responses
             TamanhoPagina = tamanhoPagina;
         }
 
-        public PaginaResponse(TDado? dado, int codigoStatus = Configuration.CodigoStatusPadrao, 
+        public PagedResponse(TDado? dado, int codigoStatus = Configuracao.CodigoStatusPadrao, 
             string? mensagem = null) : base(dado, codigoStatus, mensagem)
         {
             
@@ -28,7 +28,7 @@ namespace Money.Core.Responses
 
         public int PaginaAtual { get; set; }
         public int TotalPaginas => (int)Math.Ceiling(TotalItens / (double)TamanhoPagina);
-        public int TamanhoPagina { get; set; } = Configuration.TamanhoPaginaPadrao;
+        public int TamanhoPagina { get; set; } = Configuracao.TamanhoPaginaPadrao;
         public int TotalItens { get; set; }
     }
 }

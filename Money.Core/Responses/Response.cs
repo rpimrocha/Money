@@ -14,10 +14,10 @@ namespace Money.Core.Responses
         [JsonConstructor]
         public Response()
         {
-            _codigoStatus = Configuration.CodigoStatusPadrao;
+            _codigoStatus = Configuracao.CodigoStatusPadrao;
         }
 
-        public Response(TDado? dado, int codigoStatus = Configuration.CodigoStatusPadrao, string? mensagem = null)
+        public Response(TDado? dado, int codigoStatus = Configuracao.CodigoStatusPadrao, string? mensagem = null)
         {
             Dado = dado;
             Mensagem = mensagem ?? string.Empty;

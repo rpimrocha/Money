@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Money.Core\Money.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

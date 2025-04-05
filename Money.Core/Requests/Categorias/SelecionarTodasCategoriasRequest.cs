@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Money.Core.Requests
+namespace Money.Core.Requests.Categorias
 {
-    public abstract class BaseRequest
+    public class SelecionarTodasCategoriasRequest : PagedRequest
     {
-        public string CodigoUsuario { get; set; } = string.Empty;
+
     }
 }

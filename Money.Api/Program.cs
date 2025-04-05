@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Money.Api.Data;
+using Money.Api.Handlers;
+using Money.Core.Handlers;
 using Money.Core.Models;
+using Money.Core.Requests.Categorias;
+using Money.Core.Responses;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(x => { x.CustomSchemaIds(n => n.FullName); });
 
-builder.Services.AddTransient<Handler>();
+builder.Services.AddTransient<ICategoriaHandler, CategoriaHandler>();
 
 var app = builder.Build();
 
@@ -33,38 +37,65 @@ app.MapControllers();
 
 app.MapPost(
     "/v1/categorias",
-    ([FromBody] Request request, Handler handler) => handler.Handle(request))
-    .WithName("Categorias: Criar")
-    .WithSummary("Cria uma nova categoria.")
-    .Produces<Response>();
+    async ([FromBody] InserirCategoriaRequest request, ICategoriaHandler handler) => await handler.InserirAsync(request))
+    .WithName("Categorias: Inserir")
+    .WithSummary("Inserir uma nova categoria.")
+    .Produces<Response<Categoria?>>();
+
+app.MapPut(
+    "/v1/categorias/{codigo}",
+    async (long codigo, [FromBody] AlterarCategoriaRequest request, ICategoriaHandler handler) => 
+    {
+        request.Codigo = codigo;
+        return await handler.AlterarAsync(request);
+    })
+    .WithName("Categorias: Alterar")
+    .WithSummary("Alterar uma categoria.")
+    .Produces<Response<Categoria?>>();
+
+app.MapDelete(
+    "/v1/categorias/{codigo}",
+    async (long codigo, ICategoriaHandler handler) =>
+    {
+        ApagarCategoriaRequest request = new()
+        {
+            Codigo = codigo,
+            CodigoUsuario = "rirdopim@msn.com"
+        };
+        await handler.ApagarAsync(request);
+    })
+    .WithName("Categorias: Apagar")
+    .WithSummary("Apagar uma categoria.")
+    .Produces<Response<Categoria?>>();
+
+app.MapGet(
+    "/v1/categorias/{codigo}",
+    async (long codigo, ICategoriaHandler handler) =>
+    {
+        SelecionarCategoriaPorCodigoRequest request = new()
+        {
+            Codigo = codigo,
+            CodigoUsuario = "ricardopim@msn.com"
+        };
+        return await handler.SelecionarPorCodigoAsync(request);
+    })
+    .WithName("Categorias: Selecionar por código")
+    .WithSummary("Selecionar uma categoria pelo código.")
+    .Produces<Response<Categoria?>>();
+
+app.MapGet(
+    "/v1/categorias",
+    async (ICategoriaHandler handler) =>
+    {
+        SelecionarTodasCategoriasRequest request = new()
+        {
+            CodigoUsuario = "ricardopim@msn.com"
+        };
+        return await handler.SelecionarTodosAsync(request);
+    })
+    .WithName("Categorias: Selecionar todas")
+    .WithSummary("Selecionar todas as categorias.")
+    .Produces<PagedResponse<List<Categoria>?>>();
+
 
 app.Run();
-
-
-public class Request
-{
-    public string Titulo { get; set; } = string.Empty;
-    public string Descricao { get; set; } = string.Empty;
-}
-
-public class Response
-{
-    public long Codigo { get; set; }
-    public string Titulo { get; set; } = string.Empty;
-}
-
-public class Handler(AppDbContext context)
-{
-    public Response Handle(Request request)
-    {
-        var categoria = new Categoria { Titulo = request.Titulo, Descricao = request.Descricao };
-        context.Categorias.Add(categoria);
-        context.SaveChanges();
-
-        return new Response
-        {
-            Codigo = categoria.Codigo,
-            Titulo = categoria.Titulo
-        };
-    }
-}
