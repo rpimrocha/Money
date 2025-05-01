@@ -3,10 +3,8 @@ using Money.Api.Data;
 using Money.Core.Common.Extensions;
 using Money.Core.Handlers;
 using Money.Core.Models;
-using Money.Core.Requests.Categorias;
 using Money.Core.Requests.Transacoes;
 using Money.Core.Responses;
-using System.Drawing;
 
 namespace Money.Api.Handlers
 {
