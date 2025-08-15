@@ -44,4 +44,8 @@ app.MapControllers();
 app.MapGet("/", () => new { mensagem = "Olá Mundo!" });
 app.MapEndponts();
 
+app.MapGroup("v1/identity")
+    .WithTags("Identity")
+    .MapIdentityApi<User>();
+
 app.Run();
