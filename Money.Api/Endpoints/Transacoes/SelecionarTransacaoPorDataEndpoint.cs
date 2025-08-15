@@ -5,6 +5,7 @@ using Money.Core.Handlers;
 using Money.Core.Models;
 using Money.Core.Requests.Transacoes;
 using Money.Core.Responses;
+using System.Security.Claims;
 
 namespace Money.Api.Endpoints.Transacoes
 {
@@ -21,6 +22,7 @@ namespace Money.Api.Endpoints.Transacoes
         }
 
         private static async Task<IResult> SelecionarTransacaoPorData(
+            ClaimsPrincipal user,
             [FromServices] ITransacaoHandler handler,
             [FromQuery] DateTime? dataInicial = null, 
             [FromQuery] DateTime? dataFinal = null, 
@@ -29,7 +31,7 @@ namespace Money.Api.Endpoints.Transacoes
         {
             var request = new SelecionarTransacaoPorDataRequest
             {
-                CodigoUsuario = "ricardopim@msn.com",
+                CodigoUsuario = user.Identity?.Name ?? string.Empty,
                 DataInicial = dataInicial, 
                 DataFinal = dataFinal,
                 PaginaNumero = paginaNumero,

@@ -5,6 +5,7 @@ using Money.Core.Handlers;
 using Money.Core.Models;
 using Money.Core.Requests.Categorias;
 using Money.Core.Responses;
+using System.Security.Claims;
 
 namespace Money.Api.Endpoints.Categorias
 {
@@ -21,13 +22,14 @@ namespace Money.Api.Endpoints.Categorias
         }
 
         private static async Task<IResult> SelecionarTodasCategorias(
+            ClaimsPrincipal user,
             [FromServices] ICategoriaHandler handler,
             [FromQuery] int paginaNumero = Configuracao.PaginaNumeroPadrao,
             [FromQuery] int registrosPorPagina = Configuracao.TamanhoPaginaPadrao)
         {
             var request = new SelecionarTodasCategoriasRequest
             {
-                CodigoUsuario = "ricardopim@msn.com",
+                CodigoUsuario = user.Identity?.Name ?? string.Empty,
                 PaginaNumero = paginaNumero,
                 RegistrosPorPagina = registrosPorPagina
             };

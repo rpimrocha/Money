@@ -4,6 +4,7 @@ using Money.Core.Handlers;
 using Money.Core.Models;
 using Money.Core.Requests.Transacoes;
 using Money.Core.Responses;
+using System.Security.Claims;
 
 namespace Money.Api.Endpoints.Transacoes
 {
@@ -20,10 +21,11 @@ namespace Money.Api.Endpoints.Transacoes
         }
 
         private static async Task<IResult> InserirTransacao(
+            ClaimsPrincipal user,
             [FromBody] InserirTransacaoRequest request,
             [FromServices] ITransacaoHandler handler)
         {
-            request.CodigoUsuario = "ricardopim@msn.com";
+            request.CodigoUsuario = user.Identity?.Name ?? string.Empty;
             var response = await handler.InserirAsync(request);
 
             return response.IsSuccess

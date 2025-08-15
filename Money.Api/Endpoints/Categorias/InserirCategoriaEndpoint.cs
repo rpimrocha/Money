@@ -4,6 +4,7 @@ using Money.Core.Handlers;
 using Money.Core.Models;
 using Money.Core.Requests.Categorias;
 using Money.Core.Responses;
+using System.Security.Claims;
 
 namespace Money.Api.Endpoints.Categorias
 {
@@ -20,10 +21,11 @@ namespace Money.Api.Endpoints.Categorias
         }
 
         private static async Task<IResult> InserirCategoria(
+            ClaimsPrincipal user,
             [FromBody] InserirCategoriaRequest request,
             [FromServices] ICategoriaHandler handler)
         {
-            request.CodigoUsuario = "ricardopim@msn.com";
+            request.CodigoUsuario = user.Identity?.Name ?? string.Empty;
             var response = await handler.InserirAsync(request);
 
             return response.IsSuccess

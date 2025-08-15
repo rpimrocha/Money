@@ -4,6 +4,7 @@ using Money.Core.Handlers;
 using Money.Core.Models;
 using Money.Core.Requests.Categorias;
 using Money.Core.Responses;
+using System.Security.Claims;
 
 namespace Money.Api.Endpoints.Categorias
 {
@@ -20,12 +21,13 @@ namespace Money.Api.Endpoints.Categorias
         }
 
         private static async Task<IResult> SelecionarCategoriaPorCodigo(
+            ClaimsPrincipal user,
             [FromRoute] long codigo,
             [FromServices] ICategoriaHandler handler)
         {
             var request = new SelecionarCategoriaPorCodigoRequest
             {
-                CodigoUsuario = "ricardopim@msn.com",
+                CodigoUsuario = user.Identity?.Name ?? string.Empty,
                 Codigo = codigo
             };
             var response = await handler.SelecionarPorCodigoAsync(request);
