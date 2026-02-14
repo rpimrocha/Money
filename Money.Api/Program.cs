@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Money.Api.Common.Api;
 using Money.Api.Data;
 using Money.Api.Endpoints;
 using Money.Api.Handlers;
 using Money.Api.Models;
+using Money.Core;
 using Money.Core.Handlers;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AdicionarConfiguracao();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -16,8 +20,7 @@ builder.Services.AddSwaggerGen(x => { x.CustomSchemaIds(n => n.FullName); });
 builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
 builder.Services.AddAuthorization();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
-builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(connectionString));
+builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Configuracao.StringDeConexao));
 
 builder.Services.AddIdentityCore<User>()
     .AddRoles<IdentityRole<long>>()
