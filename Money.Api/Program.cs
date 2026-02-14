@@ -1,36 +1,19 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Money.Api.Common.Api;
-using Money.Api.Data;
 using Money.Api.Endpoints;
-using Money.Api.Handlers;
 using Money.Api.Models;
-using Money.Core;
-using Money.Core.Handlers;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AdicionarConfiguracao();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(x => { x.CustomSchemaIds(n => n.FullName); });
-
-builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
-builder.Services.AddAuthorization();
-
-builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Configuracao.StringDeConexao));
-
-builder.Services.AddIdentityCore<User>()
-    .AddRoles<IdentityRole<long>>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddApiEndpoints();
+builder.AdicionarConfiguration();
+builder.AdicionarSecurity();
+builder.AdicionarDataContexts();
+builder.AdicionarCrossOrigin();
+builder.AdicionarSwagger();
+builder.AdicionarServices();
 
 builder.Services.AddControllers();
-
-builder.Services.AddTransient<ICategoriaHandler, CategoriaHandler>();
-builder.Services.AddTransient<ITransacaoHandler, TransacaoHandler>();
 
 var app = builder.Build();
 
