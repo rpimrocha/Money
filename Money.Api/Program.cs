@@ -1,29 +1,26 @@
 using Money.Api.Common.Api;
 using Money.Api.Endpoints;
+using Money.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AdicionarAuthentication();
-builder.AdicionarSecurity();
+builder.AdicionarConfiguracao();
+builder.AdicionarSeguranca();
 builder.AdicionarDataContexts();
 builder.AdicionarCrossOrigin();
 builder.AdicionarSwagger();
-builder.AdicionarServices();
-
-//builder.Services.AddControllers();
+builder.AdicionarServicos();
 
 var app = builder.Build();
-
-
 
 if (app.Environment.IsDevelopment())
 {
     app.AtivarSwagger();
 }
 
-//app.MapControllers();
+app.UseCors(Configuracao.NomeDaPoliticaDoCors);
 
-app.AtivarAuthentication();
+app.AtivarSeguranca();
 app.MapearEndponts();
 
 app.Run();

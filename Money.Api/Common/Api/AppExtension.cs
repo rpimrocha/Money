@@ -9,7 +9,7 @@
             app.MapSwagger().RequireAuthorization();
         }
 
-        public static void AtivarAuthentication(this WebApplication app)
+        public static void AtivarSeguranca(this WebApplication app)
         {
             app.UseAuthentication();
             app.UseAuthorization();
