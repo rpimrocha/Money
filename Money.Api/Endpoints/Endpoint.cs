@@ -1,14 +1,20 @@
 ﻿using Money.Api.Common.Api;
 using Money.Api.Endpoints.Categorias;
+using Money.Api.Endpoints.Identity;
 using Money.Api.Endpoints.Transacoes;
+using Money.Api.Models;
 
 namespace Money.Api.Endpoints
 {
     public static class Endpoint
     {
-        public static void MapEndponts(this WebApplication app)
+        public static void MapearEndponts(this WebApplication app)
         {
             var endpoints = app.MapGroup("");
+
+            endpoints.MapGroup("/")
+                .WithTags("Teste da API")
+                .MapGet("/", () => new { mensagem = "Olá Mundo!" });
 
             endpoints.MapGroup("v1/categorias")
                 .WithName("Categorias")
@@ -31,6 +37,15 @@ namespace Money.Api.Endpoints
                 .MapEndpoint<ApagarTransacaoEndpoint>()
                 .MapEndpoint<SelecionarTransacaoPorCodigoEndpoint>()
                 .MapEndpoint<SelecionarTransacaoPorDataEndpoint>();
+
+            endpoints.MapGroup("v1/identity")
+                .WithTags("Identity")
+                .MapIdentityApi<User>();
+
+            endpoints.MapGroup("v1/identity")
+                .WithTags("Identity")
+                .MapEndpoint<LogoutEndpoint>()
+                .MapEndpoint<SelecionarRolesEndpoint>();
         }
 
         private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)

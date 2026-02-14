@@ -10,7 +10,7 @@ namespace Money.Api.Common.Api
 {
     public static class BuilderExtension
     {
-        public static void AdicionarConfiguration(this WebApplicationBuilder builder)
+        public static void AdicionarAuthentication(this WebApplicationBuilder builder)
         {
             Configuracao.StringDeConexao = builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
         }
