@@ -16,6 +16,15 @@ namespace Money.Api.Endpoints
                 .WithTags("Teste da API")
                 .MapGet("/", () => new { mensagem = "Olá Mundo!" });
 
+            endpoints.MapGroup("v1/identity")
+                .WithTags("Identity")
+                .MapIdentityApi<User>();
+
+            endpoints.MapGroup("v1/identity")
+                .WithTags("Identity")
+                .MapEndpoint<LogoutEndpoint>()
+                .MapEndpoint<SelecionarRolesEndpoint>();
+
             endpoints.MapGroup("v1/categorias")
                 .WithName("Categorias")
                 .WithTags("Categorias")
@@ -37,15 +46,6 @@ namespace Money.Api.Endpoints
                 .MapEndpoint<ApagarTransacaoEndpoint>()
                 .MapEndpoint<SelecionarTransacaoPorCodigoEndpoint>()
                 .MapEndpoint<SelecionarTransacaoPorDataEndpoint>();
-
-            endpoints.MapGroup("v1/identity")
-                .WithTags("Identity")
-                .MapIdentityApi<User>();
-
-            endpoints.MapGroup("v1/identity")
-                .WithTags("Identity")
-                .MapEndpoint<LogoutEndpoint>()
-                .MapEndpoint<SelecionarRolesEndpoint>();
         }
 
         private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
