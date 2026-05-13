@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Money.Core\Money.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Endpoints\Identity\Account\" />
+  </ItemGroup>
+
 </Project>

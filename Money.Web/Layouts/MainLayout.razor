@@ -1,16 +1,43 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+<MudThemeProvider
+    @ref="mudThemeProvider" 
+    @bind-IsDarkMode="isDarkMode" 
+    Theme="Configuracao.Tema" />
 
-        <article class="content px-4">
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        Money
+        <MudSpacer />
+        <MudSwitch @bind-Value="isDarkMode" />
+    </MudAppBar>
+    <MudMainContent>
+        <MudContainer>
             @Body
-        </article>
-    </main>
-</div>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private bool isDarkMode = true;
+    private MudThemeProvider mudThemeProvider = null!;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            isDarkMode = await mudThemeProvider.GetSystemPreference();
+            await mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
+            StateHasChanged();
+        }
+    }
+
+    private Task OnSystemPreferenceChanged(bool novoValor)
+    {
+        isDarkMode = novoValor;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+}
