@@ -1,9 +1,13 @@
 ﻿using MudBlazor;
+using static System.Net.WebRequestMethods;
 
 namespace Money.Web
 {
     public static class Configuracao
     {
+        public const string HttpClientName = "money";
+        public static string BackendUrl { get; set; } = "http://localhost:5001";
+
         public static MudTheme Tema = new()
         {
             Typography = new Typography()

@@ -22,33 +22,33 @@ namespace Money.Api.Endpoints
 
             endpoints.MapGroup("v1/identity")
                 .WithTags("Identity")
-                .MapEndpoint<LogoutEndpoint>()
-                .MapEndpoint<SelecionarRolesEndpoint>();
+                .MapearEndpoint<LogoutEndpoint>()
+                .MapearEndpoint<SelecionarRolesEndpoint>();
 
             endpoints.MapGroup("v1/categorias")
                 .WithName("Categorias")
                 .WithTags("Categorias")
                 .RequireAuthorization()
                 .WithOrder(1)
-                .MapEndpoint<InserirCategoriaEndpoint>()
-                .MapEndpoint<AlterarCategoriaEndpoint>()
-                .MapEndpoint<ApagarCategoriaEndpoint>()
-                .MapEndpoint<SelecionarCategoriaPorCodigoEndpoint>()
-                .MapEndpoint<SelecionarTodasCategoriasEndpoint>();
+                .MapearEndpoint<InserirCategoriaEndpoint>()
+                .MapearEndpoint<AlterarCategoriaEndpoint>()
+                .MapearEndpoint<ApagarCategoriaEndpoint>()
+                .MapearEndpoint<SelecionarCategoriaPorCodigoEndpoint>()
+                .MapearEndpoint<SelecionarTodasCategoriasEndpoint>();
 
             endpoints.MapGroup("v1/transacoes")
                 .WithName("Transações")
                 .WithTags("Transações")
                 .RequireAuthorization()
                 .WithOrder(2)
-                .MapEndpoint<InserirTransacaoEndpoint>()
-                .MapEndpoint<AlterarTransacaoEndpoint>()
-                .MapEndpoint<ApagarTransacaoEndpoint>()
-                .MapEndpoint<SelecionarTransacaoPorCodigoEndpoint>()
-                .MapEndpoint<SelecionarTransacaoPorDataEndpoint>();
+                .MapearEndpoint<InserirTransacaoEndpoint>()
+                .MapearEndpoint<AlterarTransacaoEndpoint>()
+                .MapearEndpoint<ApagarTransacaoEndpoint>()
+                .MapearEndpoint<SelecionarTransacaoPorCodigoEndpoint>()
+                .MapearEndpoint<SelecionarTransacaoPorDataEndpoint>();
         }
 
-        private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
+        private static IEndpointRouteBuilder MapearEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
             where TEndpoint : IEndpoint
         {
             TEndpoint.Map(app);
