@@ -24,7 +24,7 @@ namespace Money.Web.Handlers
             await _httpClient.PostAsJsonAsync("v1/identity/logout", emptyContent);
         }
 
-        public async Task<Response<string>> RegistroAsync(RegistroRequest request)
+        public async Task<Response<string>> RegistrarAsync(RegistroRequest request)
         {
             var result = await _httpClient.PostAsJsonAsync("v1/identity/register", request);
             return result.IsSuccessStatusCode
