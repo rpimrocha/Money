@@ -9,18 +9,28 @@
             <div class="d-flex justify-center pb-8 pt-8">
                 <img src="imagens/money.png" alt="Money Controle Financeiro" width="200" />
             </div>
-            <MudForm @ref="mudForm">
-                <MudTextField T="string" Label="E-mail" InputType="InputType.Email"
-                              Required="true" Placeholder="E-mail" RequiredError="Informe o e-mail"
-                              Validation="@(new EmailAddressAttribute { ErrorMessage="Email inválido" })" />
-                <MudTextField T="string" Label="Senha" InputType="InputType.Password"
-                              Required="true" Placeholder="Senha" RequiredError="Informe a senha" />
-            </MudForm>
-            <div class="d-flex mt-8">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary">Entrar</MudButton>
-                <MudSpacer/>
-                <MudButton Href="/registro" >Registrar</MudButton>
-            </div>
+            <EditForm Model="@LoginRequest" OnValidSubmit="LoginAsync">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <MudTextField T="string" Label="E-mail" HelperText="Campo obrigatório" InputType="InputType.Email"
+                              For="@(() => LoginRequest.Email)" @bind-Value="LoginRequest.Email" />
+                <MudTextField T="string" Label="Senha" HelperText="Campo obrigatório" InputType="InputType.Password"
+                              For="@(() => LoginRequest.Password)" @bind-Value="LoginRequest.Password" />
+
+                <div class="d-flex mt-8">
+                    @if (IsLoading)
+                    {
+                        <MudProgressCircular Indeterminate="true" Color="Color.Info" />
+                    }
+                    else
+                    {
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Entrar</MudButton>
+                        <MudSpacer />
+                        <MudButton Href="/registro">Quero me cadastrar</MudButton>
+                    }
+                </div>
+            </EditForm>
         </MudPaper>
     </MudItem>
 </MudGrid>

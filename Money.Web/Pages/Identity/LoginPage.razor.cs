@@ -6,7 +6,7 @@ using MudBlazor;
 
 namespace Money.Web.Pages.Identity
 {
-    public partial class RegistroPage : ComponentBase
+    public partial class LoginPage : ComponentBase
     {
         [Inject]
         public ISnackbar Snackbar { get; set; } = null!;
@@ -22,7 +22,7 @@ namespace Money.Web.Pages.Identity
 
 
         public bool IsLoading { get; set; } = false;
-        public RegistroRequest RegistroRequest { get; set; } = new RegistroRequest();
+        public LoginRequest LoginRequest { get; set; } = new LoginRequest();
 
 
         override protected async Task OnInitializedAsync()
@@ -34,17 +34,16 @@ namespace Money.Web.Pages.Identity
                 NavigationManager.NavigateTo("/");
         }
 
-        public async Task RegistrarAsync()
+        public async Task LoginAsync()
         {
             IsLoading = true;
-
             try
             {
-                var response = await AccountHandler.RegistrarAsync(RegistroRequest);
+                var response = await AccountHandler.LoginAsync(LoginRequest);
                 if (response.IsSuccess)
                 {
-                    Snackbar.Add("Registro realizado com sucesso!", Severity.Success);
-                    NavigationManager.NavigateTo("/login");
+                    Snackbar.Add("Login realizado com sucesso!", Severity.Success);
+                    NavigationManager.NavigateTo("/");
                 }
                 else
                 {
@@ -62,4 +61,3 @@ namespace Money.Web.Pages.Identity
         }
     }
 }
-    
