@@ -42,7 +42,8 @@ namespace Money.Web.Pages.Identity
                 var response = await AccountHandler.LoginAsync(LoginRequest);
                 if (response.IsSuccess)
                 {
-                    Snackbar.Add("Login realizado com sucesso!", Severity.Success);
+                    await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                    AuthenticationStateProvider.NotificarMudancaEstadoAutenticacao();
                     NavigationManager.NavigateTo("/");
                 }
                 else

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Money.Core.Handlers;
-using Money.Core.Requests.Account;
 using Money.Web.Security;
 using MudBlazor;
 
@@ -21,7 +20,7 @@ namespace Money.Web.Pages.Identity
         public ICookieEstadoAutenticacaoProvider AuthenticationStateProvider { get; set; } = null!;
 
 
-        public async Task LogoutAsync()
+        protected override async Task OnInitializedAsync()
         {
             if (await AuthenticationStateProvider.UsuarioAutenticadoAsync())
             {
@@ -30,7 +29,7 @@ namespace Money.Web.Pages.Identity
                 AuthenticationStateProvider.NotificarMudancaEstadoAutenticacao();
 
                 Snackbar.Add("Logout realizado com sucesso!", Severity.Success);
-                NavigationManager.NavigateTo("/login");
+                //NavigationManager.NavigateTo("/login");
             }
 
             await base.OnInitializedAsync();
