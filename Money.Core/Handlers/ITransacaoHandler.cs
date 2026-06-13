@@ -10,6 +10,6 @@ namespace Money.Core.Handlers
         Task<Response<Transacao?>> AlterarAsync(AlterarTransacaoRequest request);
         Task<Response<Transacao?>> ApagarAsync(ApagarTransacaoRequest request);
         Task<Response<Transacao?>> SelecionarPorCodigoAsync(SelecionarTransacaoPorCodigoRequest request);
-        Task<PagedResponse<List<Transacao>>> SelecionarPorDataAsync(SelecionarTransacaoPorDataRequest request);
+        Task<PagedResponse<List<Transacao>?>> SelecionarPorDataAsync(SelecionarTransacaoPorDataRequest request);
     }
 }

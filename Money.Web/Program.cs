@@ -28,5 +28,7 @@ builder.Services.AddHttpClient(Configuracao.HttpClientName, opt => {
 }).AddHttpMessageHandler<CookieHandler>();
 
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();
+builder.Services.AddTransient<ITransacaoHandler, TransacaoHandler>();
+builder.Services.AddTransient<ICategoriaHandler, CategoriaHandler>();
 
 await builder.Build().RunAsync();

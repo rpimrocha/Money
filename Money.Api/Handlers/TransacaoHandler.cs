@@ -107,7 +107,7 @@ namespace Money.Api.Handlers
             }
         }
 
-        public async Task<PagedResponse<List<Transacao>>> SelecionarPorDataAsync(SelecionarTransacaoPorDataRequest request)
+        public async Task<PagedResponse<List<Transacao>?>> SelecionarPorDataAsync(SelecionarTransacaoPorDataRequest request)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace Money.Api.Handlers
             }
             catch (Exception ex)
             {
-                return new PagedResponse<List<Transacao>>(null, 500, $"Erro ao determinar o intervalo de datas de início e término: {ex.Message}");
+                return new PagedResponse<List<Transacao>?>(null, 500, $"Erro ao determinar o intervalo de datas de início e término: {ex.Message}");
             }
 
             try
@@ -134,11 +134,11 @@ namespace Money.Api.Handlers
 
                 var totalItens = await query.CountAsync();
 
-                return new PagedResponse<List<Transacao>>(transacoes, totalItens, request.PaginaNumero, request.RegistrosPorPagina);
+                return new PagedResponse<List<Transacao>?>(transacoes, totalItens, request.PaginaNumero, request.RegistrosPorPagina);
             }
             catch (Exception ex)
             {
-                return new PagedResponse<List<Transacao>>(null, 500, $"Erro ao pesquisar todas as Transações: {ex.Message}");
+                return new PagedResponse<List<Transacao>?>(null, 500, $"Erro ao pesquisar todas as Transações: {ex.Message}");
             }
         }
     }
