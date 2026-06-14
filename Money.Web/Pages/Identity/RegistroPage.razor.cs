@@ -8,6 +8,7 @@ namespace Money.Web.Pages.Identity
 {
     public partial class RegistroPage : ComponentBase
     {
+        #region Serviços
         [Inject]
         public ISnackbar Snackbar { get; set; } = null!;
 
@@ -19,12 +20,16 @@ namespace Money.Web.Pages.Identity
 
         [Inject]
         public ICookieEstadoAutenticacaoProvider AuthenticationStateProvider { get; set; } = null!;
+        #endregion
 
 
+        #region Propriedades
         public bool IsLoading { get; set; } = false;
         public RegistroRequest RegistroRequest { get; set; } = new RegistroRequest();
+        #endregion
 
 
+        #region Substituições
         override protected async Task OnInitializedAsync()
         {
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
@@ -33,7 +38,10 @@ namespace Money.Web.Pages.Identity
             if (user?.Identity?.IsAuthenticated == true)
                 NavigationManager.NavigateTo("/");
         }
+        #endregion
 
+
+        #region Métodos
         public async Task RegistrarAsync()
         {
             IsLoading = true;
@@ -60,6 +68,7 @@ namespace Money.Web.Pages.Identity
                 IsLoading = false;
             }
         }
+        #endregion
     }
 }
     

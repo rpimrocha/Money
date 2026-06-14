@@ -7,6 +7,7 @@ namespace Money.Web.Pages.Identity
 {
     public partial class LogoutPage : ComponentBase
     {
+        #region Serviços
         [Inject]
         public ISnackbar Snackbar { get; set; } = null!;
 
@@ -18,8 +19,10 @@ namespace Money.Web.Pages.Identity
 
         [Inject]
         public ICookieEstadoAutenticacaoProvider AuthenticationStateProvider { get; set; } = null!;
+        #endregion
 
 
+        #region Substituições
         protected override async Task OnInitializedAsync()
         {
             if (await AuthenticationStateProvider.UsuarioAutenticadoAsync())
@@ -34,5 +37,6 @@ namespace Money.Web.Pages.Identity
 
             await base.OnInitializedAsync();
         }
+        #endregion
     }
 }
