@@ -29,8 +29,8 @@ namespace Money.Web.Pages.Identity
         #endregion
 
 
-        #region Substituições
-        override protected async Task OnInitializedAsync()
+        #region Sobreposições
+        protected override async Task OnInitializedAsync()
         {
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;

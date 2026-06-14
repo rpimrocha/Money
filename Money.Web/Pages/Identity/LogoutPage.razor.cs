@@ -22,7 +22,7 @@ namespace Money.Web.Pages.Identity
         #endregion
 
 
-        #region Substituições
+        #region Sobreposições
         protected override async Task OnInitializedAsync()
         {
             if (await AuthenticationStateProvider.UsuarioAutenticadoAsync())
