@@ -1,0 +1,33 @@
+﻿@page "/categorias"
+@inherits ListarCategoriasPage
+
+<MudText Typo="Typo.h3">Categorias</MudText>
+<div class="d-flex justify-end">
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.TwoTone.Add" Href="categorias/inserir">NOVA CATEGORIA</MudButton>
+</div>
+
+
+<MudDataGrid Class="mt-4" Items="@Categorias" Filterable="true" QuickFilter="Filtrar" Hideable="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Categorias</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="TermoFiltro" Placeholder="Digite para buscar..."
+            Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" 
+            Immediate="true" IconSize="Size.Medium" Class="mt-0" />
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x => x.Codigo" Title="Código" />
+        <PropertyColumn Property="x => x.Titulo" Title="Título" />
+        <TemplateColumn Class="d-flex justify-end">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" Href="@($"/categorias/editar/{context.Item.Codigo}")"></MudIconButton>
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => AoClicarNoBotaoExcluirApagarAsync(context.Item.Codigo, context.Item.Titulo)"></MudIconButton>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+
+
+</MudDataGrid>
+
