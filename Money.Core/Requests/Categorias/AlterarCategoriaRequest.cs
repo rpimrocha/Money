@@ -15,7 +15,7 @@ namespace Money.Core.Requests.Categorias
         [MaxLength(80, ErrorMessage = "Título inválido. Digitar no máximo 80 caracteres.")]
         public string Titulo { get; set; } = string.Empty;
         [Required(ErrorMessage = "Descrição inválida. Seu preenchimento é obrigatório.")]
-        [MaxLength(255, ErrorMessage = "Título inválido. Digitar no máximo 255 caracteres.")]
+        [MaxLength(255, ErrorMessage = "Descrição inválida. Digitar no máximo 255 caracteres.")]
         public string Descricao { get; set; } = string.Empty;
     }
 }

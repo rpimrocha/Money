@@ -14,7 +14,7 @@
                       For="@(() => CategoriaRequest.Descricao)" @bind-Value="CategoriaRequest.Descricao" />
 
         <div class="d-flex mt-8">
-            @if (IsLoading)
+            @if (IsSaving)
             {
                 <MudProgressCircular Indeterminate="true" Color="Color.Info" />
             }

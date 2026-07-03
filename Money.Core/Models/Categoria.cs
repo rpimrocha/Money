@@ -10,7 +10,7 @@ namespace Money.Core.Models
     {
         public long Codigo { get; set; }
         public string Titulo { get; set; } = string.Empty;
-        public string? Descricao { get; set; }
+        public string Descricao { get; set; } = string.Empty;
         public string CodigoUsuario { get; set; } = string.Empty;
     }
 }

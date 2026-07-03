@@ -8,7 +8,7 @@ namespace Money.Web.Pages.Categorias
     public partial class InserirCategoriaPage : ComponentBase
     {
         #region Propriedades
-        public bool IsLoading { get; set; } = false;
+        public bool IsSaving { get; set; } = false;
         public InserirCategoriaRequest CategoriaRequest { get; set; } = new();
         #endregion
 
@@ -28,7 +28,7 @@ namespace Money.Web.Pages.Categorias
         #region Métodos
         public async Task InserirAsync()
         {
-            IsLoading = true;
+            IsSaving = true;
             try
             {
                 var response = await CategoriaHandler.InserirAsync(CategoriaRequest);
@@ -48,7 +48,7 @@ namespace Money.Web.Pages.Categorias
             }
             finally
             {
-                IsLoading = false;
+                IsSaving = false;
             }
         }
         #endregion

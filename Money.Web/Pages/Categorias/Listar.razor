@@ -21,7 +21,7 @@
         <TemplateColumn Class="d-flex justify-end">
             <CellTemplate>
                 <MudStack Row>
-                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" Href="@($"/categorias/editar/{context.Item.Codigo}")"></MudIconButton>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" Href="@($"/categorias/alterar/{context.Item.Codigo}")"></MudIconButton>
                     <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => AoClicarNoBotaoExcluirApagarAsync(context.Item.Codigo, context.Item.Titulo)"></MudIconButton>
                 </MudStack>
             </CellTemplate>
