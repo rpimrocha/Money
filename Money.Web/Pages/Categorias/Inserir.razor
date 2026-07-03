@@ -1,0 +1,29 @@
+﻿@page "/categorias/inserir"
+@inherits InserirCategoriaPage
+
+<MudText Typo="Typo.h3">Inserir Categoria</MudText>
+<MudPaper Class="pa-8 mt-4">
+
+    <EditForm Model="@CategoriaRequest" OnValidSubmit="InserirAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <MudTextField T="string" Label="Título" HelperText="Campo obrigatório"
+                      For="@(() => CategoriaRequest.Titulo)" @bind-Value="CategoriaRequest.Titulo" />
+        <MudTextField T="string" Label="Descrição" HelperText="Campo obrigatório" Lines="5"
+                      For="@(() => CategoriaRequest.Descricao)" @bind-Value="CategoriaRequest.Descricao" />
+
+        <div class="d-flex mt-8">
+            @if (IsLoading)
+            {
+                <MudProgressCircular Indeterminate="true" Color="Color.Info" />
+            }
+            else
+            {
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Salvar</MudButton>
+                <MudSpacer />
+                <MudButton Href="/categorias">Cancelar</MudButton>
+            }
+        </div>
+    </EditForm>
+</MudPaper>
