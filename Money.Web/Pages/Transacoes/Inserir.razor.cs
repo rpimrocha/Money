@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Money.Core.Handlers;
 using Money.Core.Models;
 using Money.Core.Requests.Categorias;
+using Money.Core.Requests.Transacoes;
 using MudBlazor;
 
-namespace Money.Web.Pages.Categorias
+namespace Money.Web.Pages.Transacoes
 {
-    public partial class ListarCategoriasPage : ComponentBase
+    public partial class InserirTransacaoPage : ComponentBase
     {
         #region Propriedades
         public bool IsLoading { get; set; } = false;
+        public bool IsSaving { get; set; } = false;
         public List<Categoria> Categorias { get; set; } = [];
-        public string TermoFiltro { get; set; } = string.Empty;
+        public InserirTransacaoRequest TransacaoRequest { get; set; } = new();
         #endregion
 
 
@@ -21,7 +22,7 @@ namespace Money.Web.Pages.Categorias
         public ISnackbar Snackbar { get; set; } = null!;
 
         [Inject]
-        public IDialogService DialogService { get; set; } = null!;
+        public ITransacaoHandler TransacaoHandler { get; set; } = null!;
 
         [Inject]
         public ICategoriaHandler CategoriaHandler { get; set; } = null!;
@@ -44,12 +45,12 @@ namespace Money.Web.Pages.Categorias
                 if (response.IsSuccess)
                 {
                     Categorias = response.Dado ?? [];
+                    TransacaoRequest.CodigoCategoria = Categorias.FirstOrDefault()?.Codigo ?? 0;
                 }
                 else
                 {
                     Snackbar.Add(response.Mensagem, Severity.Warning);
                 }
-
             }
             catch (Exception ex)
             {
@@ -64,51 +65,31 @@ namespace Money.Web.Pages.Categorias
 
 
         #region Métodos
-        public async void AoClicarNoBotaoExcluirApagarAsync(long codigo, string titulo)
+        public async Task InserirAsync()
         {
-            var resultado = await DialogService.ShowMessageBox("Atenção", 
-                $"Deseja apagar a categoria \"{titulo}\" selecionada. Essa operação não tem retorno.",
-                yesText: "Apagar", cancelText: "Cancelar");
-
-            if (resultado is true)
-            {
-                await ApagarAsync(codigo, titulo);
-            }
-
-            StateHasChanged();
-        }
-
-        public async Task ApagarAsync(long codigo, string titulo)
-        {
+            IsSaving = true;
             try
             {
-                var categoriaRequest = new ApagarCategoriaRequest { Codigo = codigo };
-                await CategoriaHandler.ApagarAsync(categoriaRequest);
-                Categorias.RemoveAll(x => x.Codigo == codigo);
-                Snackbar.Add($"A categoria \"{titulo}\" foi apagada com sucesso", Severity.Success);
+                var response = await TransacaoHandler.InserirAsync(TransacaoRequest);
+                if (response.IsSuccess)
+                {
+                    Snackbar.Add(response.Mensagem, Severity.Success);
+                    NavigationManager.NavigateTo("/transacoes");
+                }
+                else
+                {
+                    Snackbar.Add(response.Mensagem, Severity.Warning);
+                }
             }
             catch (Exception ex)
             {
                 Snackbar.Add($"Ocorreu um erro: {ex.Message}", Severity.Error);
             }
+            finally
+            {
+                IsSaving = false;
+            }
         }
-
-        public Func<Categoria, bool> Filtrar => categoria =>
-        {
-            if (string.IsNullOrWhiteSpace(TermoFiltro))
-                return true;
-
-            if (categoria.Codigo.ToString().Contains(TermoFiltro, StringComparison.OrdinalIgnoreCase))
-                return true;
-
-            if (categoria.Titulo.Contains(TermoFiltro, StringComparison.OrdinalIgnoreCase))
-                return true;
-
-            if (categoria.Descricao is not null && categoria.Descricao.Contains(TermoFiltro, StringComparison.OrdinalIgnoreCase))
-                return true;
-
-            return false;
-        };
         #endregion
     }
 }
