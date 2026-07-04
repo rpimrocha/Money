@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Money.Core.Handlers;
 using Money.Core.Models;
 using Money.Core.Requests.Categorias;

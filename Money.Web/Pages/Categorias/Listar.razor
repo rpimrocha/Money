@@ -18,7 +18,7 @@
     <Columns>
         <PropertyColumn Property="x => x.Codigo" Title="Código" />
         <PropertyColumn Property="x => x.Titulo" Title="Título" />
-        <TemplateColumn Class="d-flex justify-end">
+        <TemplateColumn Title="Opções" Filterable="false" Hideable="false" Sortable="false">
             <CellTemplate>
                 <MudStack Row>
                     <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" Href="@($"/categorias/alterar/{context.Item.Codigo}")"></MudIconButton>
