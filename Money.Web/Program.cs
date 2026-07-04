@@ -6,6 +6,7 @@ using Money.Web;
 using Money.Web.Handlers;
 using Money.Web.Security;
 using MudBlazor.Services;
+using System.Globalization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -30,5 +31,9 @@ builder.Services.AddHttpClient(Configuracao.HttpClientName, opt => {
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();
 builder.Services.AddTransient<ITransacaoHandler, TransacaoHandler>();
 builder.Services.AddTransient<ICategoriaHandler, CategoriaHandler>();
+
+builder.Services.AddLocalization();
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
 
 await builder.Build().RunAsync();
