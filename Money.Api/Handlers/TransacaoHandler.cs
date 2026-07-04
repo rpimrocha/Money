@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Money.Api.Data;
 using Money.Core.Common.Extensions;
+using Money.Core.Enums;
 using Money.Core.Handlers;
 using Money.Core.Models;
 using Money.Core.Requests.Transacoes;
@@ -14,6 +15,11 @@ namespace Money.Api.Handlers
         {
             try
             {
+                if (request is { Tipo: ETipoTransacao.Saida, Valor: > 0 })
+                {
+                    request.Valor *= -1;
+                }
+
                 var transacao = new Transacao
                 {
                     Titulo = request.Titulo,
@@ -47,6 +53,11 @@ namespace Money.Api.Handlers
 
                 if (Transacao is null)
                     return new Response<Transacao?>(null, 404, $"Transação não encontrada. Código: {request.Codigo}");
+
+                if (request is { Tipo: ETipoTransacao.Saida, Valor: > 0 })
+                {
+                    request.Valor *= -1;
+                }
 
                 Transacao.Titulo = request.Titulo;
                 Transacao.DataPagamento = request.DataPagamento;
