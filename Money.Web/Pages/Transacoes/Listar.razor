@@ -1,0 +1,50 @@
+﻿@page "/transacoes"
+@inherits ListarTransacoesPage
+
+<MudText Typo="Typo.h3">Transações</MudText>
+<div class="d-flex justify-end">
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.TwoTone.Add" Href="transacoes/inserir">NOVA TRANSAÇÃO</MudButton>
+</div>
+
+<MudDataGrid Class="mt-4" Items="@Transacoes" Filterable="true" QuickFilter="Filtrar" Hideable="true" ColumnResizeMode="ResizeMode.Column">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Transações</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="TermoFiltro" Placeholder="Digite para buscar..."
+                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                      Immediate="true" IconSize="Size.Medium" Class="mt-0" />
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x => x.Codigo" Title="Código" />
+        <PropertyColumn Property="x => x.Titulo" Title="Título" />
+        <TemplateColumn Title="Tipo">
+            <CellTemplate>
+                @if (context.Item.Tipo == ETipoTransacao.Entrada)
+                {
+                    <MudChip Color="Color.Success" Size="Size.Small" Variant="Variant.Filled">Entrada</MudChip>
+                }
+                else if (context.Item.Tipo == ETipoTransacao.Saida)
+                {
+                    <MudChip Color="Color.Error" Size="Size.Small" Variant="Variant.Filled">Saída</MudChip>
+                }
+            </CellTemplate>
+        </TemplateColumn>
+        <PropertyColumn Property="x => x.Valor" Format="C" Title="Valor">
+            <FooterTemplate>@context.Items.Sum(x => x.Valor).ToString("C")</FooterTemplate>
+        </PropertyColumn>
+        <TemplateColumn Title="Opções" Filterable="false" Hideable="false" Sortable="false">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                                   Color="Color.Primary"
+                                   Href="@($"/transacoes/alterar/{context.Item.Codigo}")" />
+
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                   Color="Color.Error"
+                                   OnClick="() => AoClicarNoBotaoExcluirApagarAsync(context.Item.Codigo, context.Item.Titulo)" />
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>
+
