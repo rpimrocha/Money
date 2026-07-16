@@ -97,18 +97,31 @@ namespace Money.Web.Pages.Transacoes
             StateHasChanged();
         }
 
-        public async Task ApagarAsync(long codigo, string titulo)
+        private async Task ApagarAsync(long codigo, string titulo)
         {
+            IsLoading = true;
+
             try
             {
                 var transacaoRequest = new ApagarTransacaoRequest { Codigo = codigo };
-                await TransacaoHandler.ApagarAsync(transacaoRequest);
-                Transacoes.RemoveAll(x => x.Codigo == codigo);
-                Snackbar.Add($"A transação \"{titulo}\" foi apagada com sucesso", Severity.Success);
+                var response = await TransacaoHandler.ApagarAsync(transacaoRequest);
+                if (response.IsSuccess)
+                {
+                    Transacoes.RemoveAll(x => x.Codigo == codigo);
+                    Snackbar.Add($"A transação \"{titulo}\" foi apagada com sucesso", Severity.Success);
+                }
+                else
+                { 
+                    Snackbar.Add(response.Mensagem, Severity.Warning);
+                }
             }
             catch (Exception ex)
             {
                 Snackbar.Add($"Ocorreu um erro: {ex.Message}", Severity.Error);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 

@@ -77,18 +77,31 @@ namespace Money.Web.Pages.Categorias
             StateHasChanged();
         }
 
-        public async Task ApagarAsync(long codigo, string titulo)
+        private async Task ApagarAsync(long codigo, string titulo)
         {
+            IsLoading = true;
+
             try
             {
                 var categoriaRequest = new ApagarCategoriaRequest { Codigo = codigo };
-                await CategoriaHandler.ApagarAsync(categoriaRequest);
-                Categorias.RemoveAll(x => x.Codigo == codigo);
-                Snackbar.Add($"A categoria \"{titulo}\" foi apagada com sucesso", Severity.Success);
+                var response = await CategoriaHandler.ApagarAsync(categoriaRequest);
+                if (response.IsSuccess)
+                {
+                    Categorias.RemoveAll(x => x.Codigo == codigo);
+                    Snackbar.Add($"A categoria \"{titulo}\" foi apagada com sucesso", Severity.Success);
+                }
+                else
+                {
+                    Snackbar.Add(response.Mensagem, Severity.Warning);
+                }
             }
             catch (Exception ex)
             {
                 Snackbar.Add($"Ocorreu um erro: {ex.Message}", Severity.Error);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 
