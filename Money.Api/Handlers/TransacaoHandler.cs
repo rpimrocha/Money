@@ -134,9 +134,9 @@ namespace Money.Api.Handlers
             {
                 var query = context.Transacoes.AsNoTracking()
                     .Where(x => x.CodigoUsuario == request.CodigoUsuario &&
-                                x.DataCadastro >= request.DataInicial &&
-                                x.DataCadastro <= request.DataFinal)
-                    .OrderBy(x => x.DataCadastro);
+                                x.DataPagamento >= request.DataInicial &&
+                                x.DataPagamento <= request.DataFinal)
+                    .OrderBy(x => x.DataPagamento);
 
                 var transacoes = await query
                     .Skip(request.RegistrosPorPagina * (request.PaginaNumero - 1))

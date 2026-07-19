@@ -63,7 +63,7 @@ namespace Money.Web.Pages.Categorias
 
 
         #region Métodos
-        public async void AoClicarNoBotaoExcluirApagarAsync(long codigo, string titulo)
+        public async void AoClicarNoBotaoExcluirAsync(long codigo, string titulo)
         {
             var resultado = await DialogService.ShowMessageBox("Atenção", 
                 $"Deseja apagar a categoria \"{titulo}\" selecionada. Essa operação não tem retorno.",

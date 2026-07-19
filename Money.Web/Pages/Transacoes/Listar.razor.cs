@@ -48,6 +48,12 @@ namespace Money.Web.Pages.Transacoes
 
 
         #region Métodos
+        public async void AoClicarNoBotaoPesquisarAsync()
+        {
+            await SelecionarTransacoes();
+            StateHasChanged();
+        }
+
         private async Task SelecionarTransacoes()
         {
             IsLoading = true;
@@ -83,7 +89,7 @@ namespace Money.Web.Pages.Transacoes
             }
         }
 
-        public async void AoClicarNoBotaoExcluirApagarAsync(long codigo, string titulo)
+        public async void AoClicarNoBotaoExcluirAsync(long codigo, string titulo)
         {
             var resultado = await DialogService.ShowMessageBox("Atenção",
                 $"Deseja apagar a transação \"{titulo}\" selecionada. Essa operação não tem retorno.",
