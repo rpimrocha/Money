@@ -33,8 +33,8 @@ else
                 </MudSelectItem>
             }
         </MudSelect>
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.TwoTone.Search" OnClick="AoClicarNoBotaoPesquisarAsync" class="mr-4">PESQUISAR</MudButton>
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.TwoTone.Add" Href="transacoes/inserir">NOVA TRANSAÇÃO</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.TwoTone.Search" class="mr-4 mt-4" OnClick="AoClicarNoBotaoPesquisarAsync">PESQUISAR</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.TwoTone.Add" class="mt-4" Href="transacoes/inserir">NOVA TRANSAÇÃO</MudButton>
     </div>
     <MudDataGrid Class="mt-4" Items="@Transacoes" Filterable="true" QuickFilter="Filtrar" Hideable="true" ColumnResizeMode="ResizeMode.Column">
         <ToolBarContent>
@@ -45,7 +45,7 @@ else
                           Immediate="true" IconSize="Size.Medium" Class="mt-0" />
         </ToolBarContent>
         <Columns>
-            <PropertyColumn Property="x => x.Codigo" Title="Código" />
+            <PropertyColumn Property="x => x.DataPagamento" Format="dd/MM/yyyy" Title="Data Pagamento" />
             <PropertyColumn Property="x => x.Titulo" Title="Título" />
             <TemplateColumn Title="Tipo">
                 <CellTemplate>
