@@ -141,6 +141,7 @@ namespace Money.Api.Handlers
                 var transacoes = await query
                     .Skip(request.RegistrosPorPagina * (request.PaginaNumero - 1))
                     .Take(request.RegistrosPorPagina)
+                    .Include(t => t.Categoria)
                     .ToListAsync();
 
                 var totalItens = await query.CountAsync();

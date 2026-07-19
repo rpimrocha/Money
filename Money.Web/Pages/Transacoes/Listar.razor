@@ -46,6 +46,7 @@ else
         </ToolBarContent>
         <Columns>
             <PropertyColumn Property="x => x.DataPagamento" Format="dd/MM/yyyy" Title="Data Pagamento" />
+            <PropertyColumn Property="x => x.Categoria.Titulo" Title="Categoria" />
             <PropertyColumn Property="x => x.Titulo" Title="Título" />
             <TemplateColumn Title="Tipo">
                 <CellTemplate>
