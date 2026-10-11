@@ -1,6 +1,7 @@
 ﻿using Money.Api.Common.Api;
 using Money.Api.Endpoints.Categorias;
 using Money.Api.Endpoints.Identity;
+using Money.Api.Endpoints.Relatorios;
 using Money.Api.Endpoints.Transacoes;
 using Money.Api.Models;
 
@@ -46,6 +47,16 @@ namespace Money.Api.Endpoints
                 .MapearEndpoint<ApagarTransacaoEndpoint>()
                 .MapearEndpoint<SelecionarTransacaoPorCodigoEndpoint>()
                 .MapearEndpoint<SelecionarTransacaoPorDataEndpoint>();
+
+            endpoints.MapGroup("v1/relatorios")
+                .WithName("Relatórios")
+                .WithTags("Relatórios")
+                .RequireAuthorization()
+                .WithOrder(3)
+                .MapearEndpoint<SelecionarDespesasPorCategoriaEndpoint>()
+                .MapearEndpoint<SelecionarReceitasPorCategoriaEndpoint>()
+                .MapearEndpoint<SelecionarReceitasVersusDespesasEndpoint>()
+                .MapearEndpoint<SelecionarResultadoFinanceiroEndpoint>();
         }
 
         private static IEndpointRouteBuilder MapearEndpoint<TEndpoint>(this IEndpointRouteBuilder app)

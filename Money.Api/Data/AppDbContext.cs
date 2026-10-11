@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Money.Api.Models;
 using Money.Core.Models;
+using Money.Core.Models.Relatorios;
 using System.Reflection;
 
 namespace Money.Api.Data
@@ -18,6 +19,12 @@ namespace Money.Api.Data
     {
         public DbSet<Categoria> Categorias { get; set; } = null!;
         public DbSet<Transacao> Transacoes { get; set; } = null!;
+
+        public DbSet<DespesasPorCategoria> DespesasPorCategoria { get; set; } = null!;
+        public DbSet<ReceitasPorCategoria> ReceitasPorCategoria { get; set; } = null!;
+        public DbSet<ReceitasVersusDespesas> ReceitasVersusDespesas { get; set; } = null!;
+        public DbSet<ResultadoFinanceiro> ResultadoFinanceiro { get; set; } = null!;
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +43,10 @@ namespace Money.Api.Data
             */
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Entity<DespesasPorCategoria>().HasNoKey().ToView("ViewObterDespesasPorCategoria");
+            modelBuilder.Entity<ReceitasPorCategoria>().HasNoKey().ToView("ViewObterReceitasPorCategoria");
+            modelBuilder.Entity<ReceitasVersusDespesas>().HasNoKey().ToView("ViewObterReceitasVersusDespesas");
         }
     }
 }

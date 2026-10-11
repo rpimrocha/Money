@@ -141,3 +141,126 @@ VALUES ('Presente de Aniversário', '2026-08-22', '2026-08-22', 2, -150.00, (SEL
 
 INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
 VALUES ('Bonificação', '2026-08-24', '2026-08-24', 1, 1200.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Investimentos'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Compra de supermercado', '2026-09-05', '2026-09-05', 2, -300.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Alimentação'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Mensalidade Academia', '2026-09-10', '2026-09-10', 2, -89.99, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Fitness'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Passagem de ônibus', '2026-09-15', '2026-09-15', 2, -150.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Transporte'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Livros para curso', '2026-09-20', '2026-09-20', 2, -200.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Educação'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Salário', '2026-09-25', '2026-09-25', 1, 5000.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Investimentos'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Consulta médica', '2026-09-26', '2026-09-26', 2, -250.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Saúde'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Jantar fora', '2026-09-27', '2026-09-27', 2, -120.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Lazer'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Ração para cachorro', '2026-09-28', '2026-09-28', 2, -75.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Pets'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Pagamento de seguro de vida', '2026-09-29', '2026-09-29', 2, -150.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Seguros'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Mensalidade Netflix', '2026-09-02', '2026-09-02', 2, -45.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Lazer'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Roupa nova', '2026-09-06', '2026-09-06', 2, -300.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Roupas'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Conserto do carro', '2026-09-11', '2026-09-11', 2, -800.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Transporte'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Corte de cabelo', '2026-09-15', '2026-09-15', 2, -50.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Beleza'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Compra de livros', '2026-09-18', '2026-09-18', 2, -120.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Educação'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Reembolso de viagem', '2026-09-20', '2026-09-20', 1, 1500.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Viagem'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Aluguel de fevereiro', '2026-09-25', '2026-09-25', 2, -1500.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Moradia'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('IPVA', '2026-09-27', '2026-09-27', 2, -400.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Impostos'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Consulta veterinária', '2026-09-28', '2026-09-28', 2, -180.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Pets'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Jantar de aniversário', '2026-09-28', '2026-09-28', 2, -250.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Lazer'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Salário Mensal', '2026-10-01', '2026-10-01', 1, 5000.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Investimentos'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Conta de Luz', '2026-10-02', '2026-10-02', 2, -120.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Moradia'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Conta de Água', '2026-10-05', '2026-10-05', 2, -80.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Moradia'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Mensalidade Escolar', '2026-10-10', '2026-10-10', 2, -600.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Educação'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Compra de Roupas', '2026-10-12', '2026-10-12', 2, -300.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Roupas'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Compra de Suplementos', '2026-10-15', '2026-10-15', 2, -200.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Saúde'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Restaurante com a Família', '2026-10-18', '2026-10-18', 2, -250.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Alimentação'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Plano de Telefonia', '2026-10-20', '2026-10-20', 2, -150.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Telefonia'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Viagem de Fim de Semana', '2026-10-22', '2026-10-22', 2, -800.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Viagem'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Pagamento Seguro Carro', '2026-10-24', '2026-10-24', 2, -400.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Seguros'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Material de Arte', '2026-10-26', '2026-10-26', 2, -150.00, (SELECT TOP 1 Codigo FROM [dbo].[Categorias] WHERE Titulo='Lazer'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Receita de Freelance', '2026-10-02', '2026-10-02', 1, 2200.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Investimentos'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Conta de Internet', '2026-10-05', '2026-10-05', 2, -89.99, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Telefonia'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Despesa com Transporte', '2026-10-07', '2026-10-07', 2, -160.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Transporte'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Compra de Livros', '2026-10-09', '2026-10-09', 2, -120.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Educação'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Salário', '2026-10-10', '2026-10-10', 1, 4000.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Investimentos'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Pagamento do Aluguel', '2026-10-12', '2026-10-12', 2, -1500.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Moradia'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Gastos com Jantar', '2026-10-15', '2026-10-15', 2, -200.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Alimentação'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Consulta Médica', '2026-10-18', '2026-10-18', 2, -300.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Saúde'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Ração para Pet', '2026-10-20', '2026-10-20', 2, -75.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Pets'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Presente de Aniversário', '2026-10-22', '2026-10-22', 2, -150.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Presentes'), 'ricardopim@msn.com');
+
+INSERT INTO [dbo].[Transacoes] (Titulo, DataCadastro, DataPagamento, Tipo, Valor, CodigoCategoria, CodigoUsuario)
+VALUES ('Bonificação', '2026-10-24', '2026-10-24', 1, 1200.00, (SELECT Codigo FROM [dbo].[Categorias] WHERE Titulo='Investimentos'), 'ricardopim@msn.com');

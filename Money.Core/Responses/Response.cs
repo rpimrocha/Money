@@ -12,7 +12,7 @@ namespace Money.Core.Responses
         private readonly int _codigoStatus;
 
         [JsonConstructor]
-        public Response()
+        public Response(Task<List<Models.Relatorios.DespesasPorCategoria>> despesasPorCategoria)
         {
             _codigoStatus = Configuracao.CodigoStatusPadrao;
         }

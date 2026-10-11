@@ -61,6 +61,7 @@ namespace Money.Api.Common.Api
         {
             builder.Services.AddTransient<ICategoriaHandler, CategoriaHandler>();
             builder.Services.AddTransient<ITransacaoHandler, TransacaoHandler>();
+            builder.Services.AddTransient<IRelatorioHandler, RelatorioHandler>();
         }
     }
 }
