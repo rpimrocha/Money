@@ -1,7 +1,7 @@
 CREATE OR ALTER VIEW [ViewObterDespesasPorCategoria] AS
 	SELECT 
 		[Transacoes].CodigoUsuario,
-		[Categorias].Titulo AS [Catetoria],
+		[Categorias].Titulo AS [Categoria],
 		YEAR([Transacoes].DataPagamento) AS [Ano],
 		SUM([Transacoes].Valor) AS [Valor]
 	FROM

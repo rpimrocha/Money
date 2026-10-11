@@ -23,8 +23,6 @@ namespace Money.Api.Data
         public DbSet<DespesasPorCategoria> DespesasPorCategoria { get; set; } = null!;
         public DbSet<ReceitasPorCategoria> ReceitasPorCategoria { get; set; } = null!;
         public DbSet<ReceitasVersusDespesas> ReceitasVersusDespesas { get; set; } = null!;
-        public DbSet<ResultadoFinanceiro> ResultadoFinanceiro { get; set; } = null!;
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

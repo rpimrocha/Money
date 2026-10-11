@@ -2,7 +2,6 @@
 using Money.Api.Common.Api;
 using Money.Core.Handlers;
 using Money.Core.Requests.Relatorios;
-using Money.Core.Requests.Transacoes;
 using Money.Core.Responses;
 using System.Security.Claims;
 

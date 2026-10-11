@@ -2,7 +2,6 @@
 using Money.Api.Data;
 using Money.Core.Enums;
 using Money.Core.Handlers;
-using Money.Core.Models;
 using Money.Core.Models.Relatorios;
 using Money.Core.Requests.Relatorios;
 using Money.Core.Responses;
@@ -74,7 +73,8 @@ namespace Money.Api.Handlers
                 var resultadoFinanceiro = await context.Transacoes.AsNoTracking()
                     .Where(x => x.CodigoUsuario == request.CodigoUsuario &&
                                 x.DataPagamento >= dataInicial &&
-                                x.DataPagamento <= DateTime.Now)
+                                x.DataPagamento <= DateTime.Now
+                    )
                     .GroupBy(x => 1)
                     .Select(x => new ResultadoFinanceiro(
                         request.CodigoUsuario,
