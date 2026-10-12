@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace Money.Core.Responses
 {
@@ -12,7 +7,7 @@ namespace Money.Core.Responses
         private readonly int _codigoStatus;
 
         [JsonConstructor]
-        public Response(Task<List<Models.Relatorios.DespesasPorCategoria>> despesasPorCategoria)
+        public Response()
         {
             _codigoStatus = Configuracao.CodigoStatusPadrao;
         }
