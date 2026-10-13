@@ -1,0 +1,28 @@
+﻿@page "/relatorios/grafico-receitas-por-categoria"
+@inherits GraficoReceitasPorCategoriaPage
+
+@if (IsLoading)
+{
+    <MudPaper Class="pa-8 mt-4">
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="110px" />
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="110px" />
+        <MudSkeleton Height="55px" />
+    </MudPaper>
+}
+else
+{
+    @if (Dados.Count == 0)
+    {
+        <MudPaper Class="pa-8 mt-4">
+            <MudText Typo="Typo.h6">Nenhum dado encontrado.</MudText>
+        </MudPaper>
+    }
+    else
+    {
+        <MudPaper Class="pa-8 mt-4">
+            <MudChart ChartType="ChartType.Pie" InputLabels="@Rotulos.ToArray()" InputData="@Dados.ToArray()" Width="100%" Height="350px" />
+        </MudPaper>
+    }
+}
