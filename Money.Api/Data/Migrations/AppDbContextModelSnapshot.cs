@@ -262,6 +262,186 @@ namespace Money.Api.Migrations
                     b.ToTable("Categorias", (string)null);
                 });
 
+            modelBuilder.Entity("Money.Core.Models.Cupom", b =>
+                {
+                    b.Property<long>("Codigo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Codigo"));
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(255)
+                        .HasColumnType("NVARCHAR");
+
+                    b.Property<bool>("EstaAtivo")
+                        .HasColumnType("BIT");
+
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("CHAR");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("NVARCHAR");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("MONEY");
+
+                    b.HasKey("Codigo");
+
+                    b.ToTable("Cupons", (string)null);
+                });
+
+            modelBuilder.Entity("Money.Core.Models.Pedido", b =>
+                {
+                    b.Property<long>("Codigo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Codigo"));
+
+                    b.Property<long?>("CodigoCupom")
+                        .HasColumnType("BIGINT");
+
+                    b.Property<long>("CodigoProduto")
+                        .HasColumnType("BIGINT");
+
+                    b.Property<string>("CodigoUsuario")
+                        .IsRequired()
+                        .HasMaxLength(160)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<DateTime>("DataAtualizacao")
+                        .HasColumnType("DATETIME");
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("DATETIME");
+
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("CHAR");
+
+                    b.Property<short>("PortalPagamento")
+                        .HasColumnType("SMALLINT");
+
+                    b.Property<string>("ReferenciaPortalPagamento")
+                        .HasMaxLength(60)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<short>("SituacaoPedido")
+                        .HasColumnType("SMALLINT");
+
+                    b.HasKey("Codigo");
+
+                    b.HasIndex("CodigoCupom");
+
+                    b.HasIndex("CodigoProduto");
+
+                    b.ToTable("Pedidos", (string)null);
+                });
+
+            modelBuilder.Entity("Money.Core.Models.Produto", b =>
+                {
+                    b.Property<long>("Codigo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Codigo"));
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(255)
+                        .HasColumnType("NVARCHAR");
+
+                    b.Property<bool>("EstaAtivo")
+                        .HasColumnType("BIT");
+
+                    b.Property<string>("Referencia")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("NVARCHAR");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("MONEY");
+
+                    b.HasKey("Codigo");
+
+                    b.ToTable("Produtos", (string)null);
+                });
+
+            modelBuilder.Entity("Money.Core.Models.Relatorios.DespesasPorCategoria", b =>
+                {
+                    b.Property<int>("Ano")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodigoUsuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ViewObterDespesasPorCategoria", (string)null);
+                });
+
+            modelBuilder.Entity("Money.Core.Models.Relatorios.ReceitasPorCategoria", b =>
+                {
+                    b.Property<int>("Ano")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodigoUsuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ViewObterReceitasPorCategoria", (string)null);
+                });
+
+            modelBuilder.Entity("Money.Core.Models.Relatorios.ReceitasVersusDespesas", b =>
+                {
+                    b.Property<int>("Ano")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CodigoUsuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Despesas")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Mes")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Receitas")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ViewObterReceitasVersusDespesas", (string)null);
+                });
+
             modelBuilder.Entity("Money.Core.Models.Transacao", b =>
                 {
                     b.Property<int>("Codigo")
@@ -345,6 +525,24 @@ namespace Money.Api.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Money.Core.Models.Pedido", b =>
+                {
+                    b.HasOne("Money.Core.Models.Cupom", "Cupom")
+                        .WithMany()
+                        .HasForeignKey("CodigoCupom")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Money.Core.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("CodigoProduto")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Cupom");
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("Money.Core.Models.Transacao", b =>

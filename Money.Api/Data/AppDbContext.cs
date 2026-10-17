@@ -19,6 +19,10 @@ namespace Money.Api.Data
     {
         public DbSet<Categoria> Categorias { get; set; } = null!;
         public DbSet<Transacao> Transacoes { get; set; } = null!;
+        public DbSet<Produto> Produtos { get; set; } = null!;
+        public DbSet<Pedido> Pedidos { get; set; } = null!;
+        public DbSet<Cupom> Cupons { get; set; } = null!;
+
 
         public DbSet<DespesasPorCategoria> DespesasPorCategoria { get; set; } = null!;
         public DbSet<ReceitasPorCategoria> ReceitasPorCategoria { get; set; } = null!;
